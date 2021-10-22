@@ -138,6 +138,93 @@ namespace Svelto.ECS
         readonly EntityCollection<T4> _array4;
     }
 
+    public readonly ref struct EntityCollection<T1, T2, T3, T4, T5> where T1 : struct, IEntityComponent
+                                                                where T2 : struct, IEntityComponent
+                                                                where T3 : struct, IEntityComponent
+                                                                where T4 : struct, IEntityComponent
+                                                                where T5 : struct, IEntityComponent
+    {
+        internal EntityCollection
+        (in EntityCollection<T1> array1, in EntityCollection<T2> array2, in EntityCollection<T3> array3
+       , in EntityCollection<T4> array4, in EntityCollection<T5> array5)
+        {
+            _array1 = array1;
+            _array2 = array2;
+            _array3 = array3;
+            _array4 = array4;
+            _array5 = array5;
+        }
+
+        internal EntityCollection<T1> buffer1
+        {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get => _array1;
+        }
+
+        internal EntityCollection<T2> buffer2
+        {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get => _array2;
+        }
+
+        internal EntityCollection<T3> buffer3
+        {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get => _array3;
+        }
+
+        internal EntityCollection<T4> buffer4
+        {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get => _array4;
+        }
+
+        internal EntityCollection<T5> buffer5
+        {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get => _array5;
+        }
+
+        internal uint count => _array1.count;
+
+        readonly EntityCollection<T1> _array1;
+        readonly EntityCollection<T2> _array2;
+        readonly EntityCollection<T3> _array3;
+        readonly EntityCollection<T4> _array4;
+        readonly EntityCollection<T5> _array5;
+    }
+
+    public readonly struct BT<BufferT1, BufferT2, BufferT3, BufferT4, BufferT5>
+    {
+        public readonly BufferT1 buffer1;
+        public readonly BufferT2 buffer2;
+        public readonly BufferT3 buffer3;
+        public readonly BufferT4 buffer4;
+        public readonly BufferT5 buffer5;
+        public readonly int count;
+
+        public BT(BufferT1 bufferT1, BufferT2 bufferT2, BufferT3 bufferT3, BufferT4 bufferT4, BufferT5 bufferT5, uint count) : this()
+        {
+            this.buffer1 = bufferT1;
+            this.buffer2 = bufferT2;
+            this.buffer3 = bufferT3;
+            this.buffer4 = bufferT4;
+            this.buffer5 = bufferT5;
+
+            this.count = (int)count;
+        }
+
+        public void Deconstruct(out BufferT1 bufferT1, out BufferT2 bufferT2, out BufferT3 bufferT3, out BufferT4 bufferT4, out BufferT5 bufferT5, out int count)
+        {
+            bufferT1 = buffer1;
+            bufferT2 = buffer2;
+            bufferT3 = buffer3;
+            bufferT4 = buffer4;
+            bufferT5 = buffer5;
+            count = this.count;
+        }
+    }
+
     public readonly struct BT<BufferT1, BufferT2, BufferT3, BufferT4>
     {
         public readonly BufferT1 buffer1;
@@ -153,6 +240,15 @@ namespace Svelto.ECS
             this.buffer3 = bufferT3;
             this.buffer4 = bufferT4;
             this.count   = (int) count;
+        }
+
+        public void Deconstruct(out BufferT1 bufferT1, out BufferT2 bufferT2, out BufferT3 bufferT3, out BufferT4 bufferT4, out int count)
+        {
+            bufferT1 = buffer1;
+            bufferT2 = buffer2;
+            bufferT3 = buffer3;
+            bufferT4 = buffer4;
+            count = this.count;
         }
     }
 

@@ -162,6 +162,15 @@ namespace Svelto.ECS
             return new GroupsEnumerable<T1, T2, T3, T4>(this, groups);
         }
 
+        public GroupsEnumerable<T1, T2, T3, T4, T5> QueryEntities<T1, T2, T3, T4, T5>
+            (in LocalFasterReadOnlyList<ExclusiveGroupStruct> groups)
+            where T1 : struct, IEntityComponent where T2 : struct, IEntityComponent
+            where T3 : struct, IEntityComponent where T4 : struct, IEntityComponent
+            where T5 : struct, IEntityComponent
+        {
+            return new GroupsEnumerable<T1, T2, T3, T4, T5>(this, groups);
+        }
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public EGIDMapper<T> QueryMappedEntities<T>(ExclusiveGroupStruct groupStructId)
             where T : struct, IEntityComponent
