@@ -9,6 +9,7 @@ namespace Svelto.ECS
         //the entity from the special standard group.
         void RemoveEntity<T>(uint entityID, ExclusiveBuildGroup groupID , [CallerMemberName] string caller = null) where T : IEntityDescriptor, new();
         void RemoveEntity<T>(EGID entityegid , [CallerMemberName] string caller = null) where T : IEntityDescriptor, new();
+        void RemoveEntity(EGID entityEGID, [CallerMemberName] string caller = null);
         
         void RemoveEntitiesFromGroup(ExclusiveBuildGroup groupID , [CallerMemberName] string caller = null);
         void SwapEntitiesInGroup(ExclusiveBuildGroup fromGroupID, ExclusiveBuildGroup toGroupID, [CallerMemberName] string caller = null);

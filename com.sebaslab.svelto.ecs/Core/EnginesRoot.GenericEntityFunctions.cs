@@ -32,6 +32,20 @@ namespace Svelto.ECS
                 _enginesRoot.Target.QueueRemoveEntityOperation(
                     entityEGID, _enginesRoot.Target.FindRealComponents<T>(entityEGID), caller);
             }
+            
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public void RemoveEntity(EGID entityEGID, [CallerMemberName] string caller = null)
+            {
+                // TODO: Implement me.
+                
+                IEntityDescriptor descriptor = null;
+
+                DBC.ECS.Check.Require(entityEGID.groupID.isInvalid == false, "invalid group detected");
+                _enginesRoot.Target.CheckRemoveEntityID(entityEGID, descriptor.GetType(), caller);
+
+                _enginesRoot.Target.QueueRemoveEntityOperation(
+                    entityEGID, _enginesRoot.Target.FindRealComponents(entityEGID, descriptor.componentsToBuild), caller);
+            }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public void RemoveEntitiesFromGroup(ExclusiveBuildGroup groupID, [CallerMemberName] string caller = null)
